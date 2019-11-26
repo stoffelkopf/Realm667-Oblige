@@ -1,0 +1,16 @@
+//
+// MAPINFO LUMP created by OBLIGE
+//
+
+DoomEdNums
+{
+	10501 = Arachnophyte
+	10502 = AracnorbQueen
+	10503 = BFGGuy
+	10504 = Cyberbaron
+	10505 = Haedexebus
+	10506 = Terror
+	10507 = ForgottenOne
+	10508 = BloodDemonClone
+	10509 = CGunSpider
+}

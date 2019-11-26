@@ -1,0 +1,65 @@
+arachnophyte/sight dsaphsit
+$RANDOM arachnophyte/pain { arachnophyte/pain1 arachnophyte/pain2 arachnophyte/pain3 }
+arachnophyte/pain1 dsaphpn1
+arachnophyte/pain2 dsaphpn2
+arachnophyte/pain3 dsaphpn3
+
+arachnophyte/death dsaphdth
+
+arachnophyte/engine dsapheng
+
+queen/sight quesit
+queen/pain quepain
+queen/death quedie
+queen/active queact
+//queen/scream bqegg1a
+queen/fire qbfgfire
+electricplasma/shoot		PZAPSEE	
+electricplasma/hit		PZAPHIT
+queen/hit		qbfghit
+queen/melee		quebit
+
+cbaron/sight	cbarnsit
+cbaron/pain	cbarnpai
+cbaron/death	cbarndth
+cbaron/active	cbarnact
+cbaron/metal	cmetal
+
+UNMNROAM UNMNROAM
+UNMNPAIN UNMNPAIN
+UNMNDYIN UNMNDYIN
+UNMNRAIL UNMNRAIL
+UNMBWOSH UNMBWOSH
+UNMBFIR2 UNMBFIR2
+UNMBMACX UNMBMACX
+UNMBMACI UNMBMACI
+UNMBOOOM UNMBOOOM
+
+$Random Forgotten/Attack { FRGOATK1 FRGOATK2 FRGOATK3 }
+FRGOATK1	FRGOATK1
+FRGOATK2	FRGOATK2
+FRGOATK3	FRGOATK3
+$Random Forgotten/Active { FRGOACT1 FRGOACT2 FRGOACT3 }
+FRGOACT1	FRGOACT1
+FRGOACT2	FRGOACT2
+FRGOACT3	FRGOACT3
+FRGOACT4	FRGOACT4
+$Random Forgotten/Pain { FRGOPAI1 FRGOPAI2 FRGOPAI3 }
+FRGOPAI1	FRGOPAI1
+FRGOPAI2	FRGOPAI2
+FRGOPAI3	FRGOPAI3
+$Random Forgotten/Death { FRGODEA1 FRGODEA2 FRGODEA3 }
+FRGODEA1	FRGODEA1
+FRGODEA2	FRGODEA2
+FRGODEA3	FRGODEA3
+
+blooddemon/sight DSBLDSIT
+blooddemon/pain DSBLDPAI
+blooddemon/death DSBLDDTH
+blooddemon/active DSBLDACT
+blooddemon/melee DSBLDATK
+blooddemon/walk DSBLDWAL
+
+CGunSpider/Sight	DSCSPISE
+CGunSpider/Death	DSCSPIDI
+CGunSpider/Attack	DSCSPIFI
