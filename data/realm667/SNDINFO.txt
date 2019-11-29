@@ -63,3 +63,36 @@ blooddemon/walk DSBLDWAL
 CGunSpider/Sight	DSCSPISE
 CGunSpider/Death	DSCSPIDI
 CGunSpider/Attack	DSCSPIFI
+
+$RANDOM CIMPSIT { CIMPSIT1 CIMPSIT2 }
+CIMPSIT1	CIMPCIT1
+CIMPSIT2	CIMPSIT2
+$RANDOM CIMPDTH { CIMPDTH1 CIMPDTH2 }
+CIMPDTH1	CIMPDTH1
+CIMPDTH2	CIMPDTH2
+CIMPPAIN	CIMPPAIN
+CIMPACT		CIMPACT
+
+monster/brusit dsbrusit
+
+monster/brudth dsbrudth
+
+monster/bruwlk dsbruwlk
+monster/brufir dsbrufir
+weapons/hellex dshellex
+
+$Random QuadShotgunZombie/SingleFire { QSGZFIR1 QSGZFIR2 }
+QSGZFIR1	QSGZFIR1
+QSGZFIR2	QSGZFIR2
+QuadShotgunZombie/QuadFire	QSGZFIR3
+QuadShotgunZombie/Reload1	QSGZREL1
+QuadShotgunZombie/Reload2	QSGZREL2
+QuadShotgunZombie/Reload3	QSGZREL3
+
+Rocketimp/xdie RKIMPD
+Rocketimp/Explode RIEXPL
+Rocketimp/Fire RIFIRE
+
+LordOfHeresy/sight DSLOHSIT
+LordOfHeresy/act DSLOHACT
+LordOfHeresy/death DSLOHDTH

@@ -46,8 +46,42 @@ REALM667.MONSTERS =
 		room_size = "medium"
 		infight_damage = 40
 	}	
-
-	
+	Cybruiser =
+	{
+		id = 10511 
+		r = 24
+		h = 64 
+		level = 6
+		boss_type = "minor"
+		boss_prob = 50
+		prob = 5
+		crazy_prob = 20
+		health = 2000
+		damage = 11
+		attack = "missile"
+		density = 0.3
+		weap_min_damage = 88
+		room_size = "medium"
+		infight_damage = 45
+	}	
+	LordofHeresy =
+	{
+		id = 10515 
+		r = 20
+		h = 56 
+		level = 6
+		boss_type = "minor"
+		boss_prob = 50
+		prob = 5
+		crazy_prob = 20
+		health = 1250
+		damage = 7.5
+		attack = "missile"
+		density = 0.3
+		weap_min_damage = 88
+		room_size = "medium"
+		infight_damage = 40
+	}	
 	---------------
 	--Infantry--
 	---------------	
@@ -171,6 +205,71 @@ REALM667.MONSTERS =
 		infight_damage = 30
 		boss_replacement = "arach"
 	}	
+	cyberImp =
+	{
+		id = 10510
+		r = 20
+		h = 56 
+		level = 1
+		prob = 80
+		health = 100
+		damage = 5
+		attack = "missile"
+		density = 1.0
+		room_size = "small"
+		trap_factor = 0.3
+		infight_damage = 4.0
+	}
+	QuadShotgunZombie =
+	{
+		id = 10512
+		r = 20
+		h = 56 
+		level = 1
+		prob = 70
+		health = 140
+		damage = 4
+		attack = "hitscan"
+		density = 1.0
+		weap_needed = { shotty=true }
+		species = "zombie"
+		room_size = "small"
+		disloyal = true
+		trap_factor = 2.0
+		infight_damage = 6.1
+	}	
+	RocketImp =
+	{
+		id = 10513
+		r = 20
+		h = 56 
+		level = 3
+		prob = 80
+		health = 75
+		damage = 10
+		attack = "missile"
+		density = 1.0
+		room_size = "small"
+		trap_factor = 0.3
+		infight_damage = 4.0
+	}
+	MaulerDemon =
+	{
+		id = 10514
+		r = 30
+		h = 56 
+		level = 1
+		prob = 50
+		health = 150
+		damage = 2
+		attack = "melee"
+		density = 0.85
+		weap_min_damage = 40
+		weap_prefs = { launch=0.3 }
+		room_size = "any"
+		infight_damage = 3.5
+	}
+	
 }
 
 REALM667.CONTROL_CHOICES =
@@ -232,6 +331,7 @@ function REALM667.add_files()
 	gui.wad_merge_sections("data/realm667/monsters.wad");
 	gui.wad_insert_file("data/realm667/GLDEFS.txt","GLDEFS");
 	gui.wad_insert_file("data/realm667/DECORATE.txt","DECORATE");
+	gui.wad_insert_file("data/realm667/DECALDEF.txt","DECALDEF");		
 	gui.wad_insert_file("data/realm667/MAPINFO.txt","MAPINFO");
 	gui.wad_insert_file("data/realm667/REALM667.txt","REALM667");
 	gui.wad_insert_file("data/realm667/SNDINFO.txt","SNDINFO");
@@ -297,7 +397,35 @@ function REALM667.add_sounds()
 -- Chaingun Spider
 	gui.wad_insert_file("data/realm667/sounds/DSCSPIDI.ogg","DSCSPIDI");	
 	gui.wad_insert_file("data/realm667/sounds/DSCSPIFI.ogg","DSCSPIFI");	
-	gui.wad_insert_file("data/realm667/sounds/DSCSPISE.ogg","DSCSPISE");		
+	gui.wad_insert_file("data/realm667/sounds/DSCSPISE.ogg","DSCSPISE");	
+-- Cyber Imp
+	gui.wad_insert_file("data/realm667/sounds/CIMPSIT1.wav","CIMPSIT1");	
+	gui.wad_insert_file("data/realm667/sounds/CIMPSIT2.wav","CIMPSIT2");	
+	gui.wad_insert_file("data/realm667/sounds/CIMPPAIN.wav","CIMPPAIN");	
+	gui.wad_insert_file("data/realm667/sounds/CIMPDTH1.wav","CIMPDTH1");	
+	gui.wad_insert_file("data/realm667/sounds/CIMPDTH2.wav","CIMPDTH2");	
+	gui.wad_insert_file("data/realm667/sounds/CIMPACT.wav","CIMPACT");	
+-- Cybruiser	
+	gui.wad_insert_file("data/realm667/sounds/DSBRUSIT.ogg","DSBRUSIT");	
+	gui.wad_insert_file("data/realm667/sounds/DSBRUWLK.ogg","DSBRUWLK");	
+	gui.wad_insert_file("data/realm667/sounds/DSBRUFIR.ogg","DSBRUFIR");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELLEX.ogg","DSHELLEX");	
+	gui.wad_insert_file("data/realm667/sounds/DSBRUDTH.ogg","DSBRUDTH");	
+-- Quad Shotgun Zombie	
+	gui.wad_insert_file("data/realm667/sounds/QSGZFIR1.ogg","QSGZFIR1");	
+	gui.wad_insert_file("data/realm667/sounds/QSGZFIR2.ogg","QSGZFIR2");	
+	gui.wad_insert_file("data/realm667/sounds/QSGZFIR3.ogg","QSGZFIR3");	
+	gui.wad_insert_file("data/realm667/sounds/QSGZREL1.ogg","QSGZREL1");	
+	gui.wad_insert_file("data/realm667/sounds/QSGZREL2.ogg","QSGZREL2");	
+	gui.wad_insert_file("data/realm667/sounds/QSGZREL3.ogg","QSGZREL3");	
+-- Rocket Imp
+	gui.wad_insert_file("data/realm667/sounds/RKIMPD.ogg","RKIMPD");	
+	gui.wad_insert_file("data/realm667/sounds/RIEXPL.ogg","RIEXPL");	
+	gui.wad_insert_file("data/realm667/sounds/RIFIRE.ogg","RIFIRE");	
+-- Heresy Lord
+	gui.wad_insert_file("data/realm667/sounds/DSLOHACT.ogg","DSLOHACT");	
+	gui.wad_insert_file("data/realm667/sounds/DSLOHDTH.ogg","DSLOHDTH");	
+	gui.wad_insert_file("data/realm667/sounds/DSLOHSIT.ogg","DSLOHSIT");	
 end
 
 function REALM667.add_brightmaps()
@@ -407,7 +535,151 @@ function REALM667.add_brightmaps()
 	gui.wad_insert_file("data/realm667/brightmaps/BMCSPIH2.png","BMCSPIH2");		
 	gui.wad_insert_file("data/realm667/brightmaps/BMCSPIH3.png","BMCSPIH3");		
 	gui.wad_insert_file("data/realm667/brightmaps/BMCSPIH4.png","BMCSPIH4");		
-	gui.wad_insert_file("data/realm667/brightmaps/BMCSPIH5.png","BMCSPIH5");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMCSPIH5.png","BMCSPIH5");	
+-- Cybruiser
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSA1.png","BMBRUSA1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSA2.png","BMBRUSA2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSA7.png","BMBRUSA7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSA8.png","BMBRUSA8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSB1.png","BMBRUSB1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSB2.png","BMBRUSB2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSB7.png","BMBRUSB7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSB8.png","BMBRUSB8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSC1.png","BMBRUSC1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSC2.png","BMBRUSC2");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSC3.png","BMBRUSC3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSC7.png","BMBRUSC7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSC8.png","BMBRUSC8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSD1.png","BMBRUSD1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSD2.png","BMBRUSD2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSD3.png","BMBRUSD3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSD7.png","BMBRUSD7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSD8.png","BMBRUSD8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSE1.png","BMBRUSE1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSE2.png","BMBRUSE2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSE3.png","BMBRUSE3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSE7.png","BMBRUSE7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSE8.png","BMBRUSE8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF1.png","BMBRUSF1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF2.png","BMBRUSF2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF3.png","BMBRUSF3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF4.png","BMBRUSF4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF5.png","BMBRUSF5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF6.png","BMBRUSF6");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF7.png","BMBRUSF7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSF8.png","BMBRUSF8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSG1.png","BMBRUSG1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSG2.png","BMBRUSG2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSG3.png","BMBRUSG3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSG8.png","BMBRUSG8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSH1.png","BMBRUSH1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSH2.png","BMBRUSH2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSH7.png","BMBRUSH7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSH8.png","BMBRUSH8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSI1.png","BMBRUSI1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSI2.png","BMBRUSI2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSI7.png","BMBRUSI7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSI8.png","BMBRUSI8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSJ1.png","BMBRUSJ1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSJ2.png","BMBRUSJ2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSJ3.png","BMBRUSJ3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSJ7.png","BMBRUSJ7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSJ8.png","BMBRUSJ8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSK0.png","BMBRUSK0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSL0.png","BMBRUSL0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSM0.png","BMBRUSM0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSN0.png","BMBRUSN0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSO0.png","BMBRUSO0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSP0.png","BMBRUSP0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSQ0.png","BMBRUSQ0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMBRUSR0.png","BMBRUSR0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMFBRSA1.png","BMFBRSA1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMFBRSA2.png","BMFBRSA2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMFBRSA3.png","BMFBRSA3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMFBRSA4.png","BMFBRSA4");			
+--Rocket Imp
+	gui.wad_insert_file("data/realm667/brightmaps/SCORCH2.png","SCORCH2");		
+-- Mauler Demon
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDA1.png","BMMAUDA1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDA2.png","BMMAUDA2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDA3.png","BMMAUDA3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDA7.png","BMMAUDA7");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDA8.png","BMMAUDA8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDB1.png","BMMAUDB1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDB2.png","BMMAUDB2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDB3.png","BMMAUDB3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDB7.png","BMMAUDB7");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDB8.png","BMMAUDB8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDE1.png","BMMAUDE1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDE2.png","BMMAUDE2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDE8.png","BMMAUDE8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDF1.png","BMMAUDF1");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDF2.png","BMMAUDF2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDF8.png","BMMAUDF8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDG1.png","BMMAUDG1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDG2.png","BMMAUDG2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDG8.png","BMMAUDG8");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDH1.png","BMMAUDH1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDH2.png","BMMAUDH2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDH3.png","BMMAUDH3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDH4.png","BMMAUDH4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDH8.png","BMMAUDH8");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMMAUDI0.png","BMMAUDI0");				
+--Heresy Lord
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSA1.png","BMLOHSA1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSA2.png","BMLOHSA2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSA3.png","BMLOHSA3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSA4.png","BMLOHSA4");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSA5.png","BMLOHSA5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSB1.png","BMLOHSB1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSB2.png","BMLOHSB2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSB3.png","BMLOHSB3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSB4.png","BMLOHSB4");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSB5.png","BMLOHSB5");				
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSC1.png","BMLOHSC1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSC2.png","BMLOHSC2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSC3.png","BMLOHSC3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSC4.png","BMLOHSC4");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSC5.png","BMLOHSC5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSD1.png","BMLOHSD1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSD2.png","BMLOHSD2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSD3.png","BMLOHSD3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSD4.png","BMLOHSD4");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSD5.png","BMLOHSD5");				
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE1.png","BMLOHSE1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE2.png","BMLOHSE2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE3.png","BMLOHSE3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE4.png","BMLOHSE4");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE5.png","BMLOHSE5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE6.png","BMLOHSE6");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE7.png","BMLOHSE7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSE8.png","BMLOHSE8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF1.png","BMLOHSF1");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF2.png","BMLOHSF2");				
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF3.png","BMLOHSF3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF4.png","BMLOHSF4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF5.png","BMLOHSF5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF6.png","BMLOHSF6");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF7.png","BMLOHSF7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSF8.png","BMLOHSF8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG1.png","BMLOHSG1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG2.png","BMLOHSG2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG3.png","BMLOHSG3");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG4.png","BMLOHSG4");				
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG5.png","BMLOHSG5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG6.png","BMLOHSG6");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG7.png","BMLOHSG7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSG8.png","BMLOHSG8");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH1.png","BMLOHSH1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH2.png","BMLOHSH2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH3.png","BMLOHSH3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH4.png","BMLOHSH4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH5.png","BMLOHSH5");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH6.png","BMLOHSH6");					
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH7.png","BMLOHSH7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH8.png","BMLOHSH8");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSI0.png","BMLOHSI0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSJ0.png","BMLOHSJ0");						
 end
 
 function REALM667.monster_setup(self)
@@ -517,5 +789,43 @@ OB_MODULES["realm667_monster_control"] =
 		tooltip="A Arachnotron with a Chaingun."
 		default="none"
     }	
+	cyberImp = 
+    {
+		label="Cyber Imp",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }	
+	Cybruiser =
+    {
+		label="Cybruiser",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }	
+	QuadShotgunZombie =
+	{
+		label="Quad-Shotgun Zombie",
+        choices=REALM667.CONTROL_CHOICES
+		tooltip="A zombie with a Quad-Shotgun."
+		default="none"	
+	}
+	RocketImp = 
+    {
+		label="Rocket Imp",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+		tooltip="A cyborg imp with dual rocket launchers."
+    }	
+    MaulerDemon	=
+    {
+		label="Mauler Demon",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }	
+	LordofHeresy =
+    {
+		label="Heresy Lord",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }		
   }
  }

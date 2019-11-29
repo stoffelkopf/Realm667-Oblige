@@ -196,4 +196,366 @@ Class BloodDemonArm : Actor
   }
 }
 
+Class Cybruiser : BaronOfHell
+{
+  Default
+  {
+    Health 2000;
+    Radius 24;
+    Height 64;
+    Mass 1000;
+    Speed 8;
+    PainChance 20;
+    Obituary "%o was blown away by a Cybruiser.";
+    HitObituary "%o was smashed by a Cybruiser.";
+    SeeSound "monster/brusit";
+    PainSound "baron/pain";
+    DeathSound "monster/brudth";
+    Monster;
+    +FloorClip
+    +MissileMore
+    +Boss
+    +DontHarmClass
+  }
 
+  States
+  {
+  Spawn:
+    BRUS AB 10 A_Look();
+    Loop;
+  See:
+    BRUS A 1 A_Playsound("monster/bruwlk");
+    BRUS A 2 A_Chase();
+    BRUS A 3 A_Chase();
+    BRUS BB 3 A_Chase();
+    BRUS C 1 A_Playsound("monster/bruwlk");
+    BRUS C 2 A_Chase();
+    BRUS C 3 A_Chase();
+    BRUS DD 3 A_Chase();
+    Loop;
+  Missile:
+    BRUS E 8 A_FaceTarget();
+    BRUS F 12 Bright A_SpawnProjectile("BruiserMissile",38,15,0,0);
+    BRUS E 12 A_FaceTarget();
+    BRUS F 12 Bright A_SpawnProjectile("BruiserMissile",38,15,0,0);
+    BRUS E 12 A_FaceTarget();
+    BRUS F 12 Bright A_SpawnProjectile("BruiserMissile",38,15,0,0);
+    Goto See;
+  Melee:
+    BRUS GH 8 A_FaceTarget();
+    BRUS I 8 A_CustomMeleeAttack(10*random(1,8), "baron/melee");
+    Goto See;
+  Pain:
+    BRUS J 2;
+    BRUS J 2 A_Pain();
+    Goto See;
+  Death:
+    BRUS K 6 Bright A_Scream();
+    BRUS LMN 6 Bright;
+    BRUS O 6 Bright A_NoBlocking();
+    BRUS QR 6 Bright;
+    BRUS S 6;
+    BRUS T -1 A_BossDeath();
+    Stop;
+  }
+}
+
+Class BruiserMissile : Actor
+{
+  Default
+  {
+    Radius 8;
+    Height 12;
+    Speed 20;
+    Damage 10;
+    DamageType "Fire";
+    Scale 1.0;
+    RenderStyle "Normal";
+    SeeSound "monster/brufir";
+    DeathSound "weapons/hellex";
+    Decal "Scorch";
+    Projectile;
+    +ThruGhost
+  }
+
+  States
+  {
+  Spawn:
+    FBRS A 1 Bright;
+    FBRS A 1 Bright A_SpawnItemEx("BruiserTrail",0,0,0,0,0,0,0,128);
+    Loop;
+  Death:
+    BAL3 C 0 Bright A_SetTranslucent(0.67,1);
+    BAL3 C 6 Bright;
+    BAL3 D 6 Bright A_Explode(64,64,0);
+    BAL3 E 6 Bright;
+    Stop;
+  }
+}
+
+Class BruiserTrail : Actor
+{
+  Default
+  {
+    Radius 3;
+    Height 3;
+    RenderStyle "Translucent";
+    Alpha 0.67;
+    Projectile;
+  }
+
+  States
+  {
+  Spawn:
+    TNT1 A 3 Bright;
+    PUFF ABCD 4 BRIGHT;
+    Stop;
+  }
+}
+
+Class QuadShotgunZombie : Actor
+{
+  int magazine;
+
+  Default
+  {
+    Tag "Quad-Shotgun Zombie";
+    Health 140;
+    Radius 20;
+    Height 56;
+    Mass 100;
+    Speed 8;
+    PainChance 60;
+    SeeSound "ShotGuy/Sight";
+    PainSound "ShotGuy/Pain";
+    DeathSound "ShotGuy/Death";
+    ActiveSound "ShotGuy/Active";
+    Obituary "%o was smeared by a Quad-Shotgun Zombie";
+    DropItem "Shell";
+    Monster;
+    +FloorClip
+  }
+
+  States
+  {
+  Spawn:
+    QSZM AAAAAAAAAABBBBBBBBBB 1 A_Look();
+    Loop;
+  See:
+    QSZM AABBCCDD 3 A_Chase();
+    Loop;
+  Missile:
+    QSZM E 0 DecideToQuad();
+    QSZM EE 5 A_FaceTarget();
+    QSZM F 4 Bright
+    {
+      A_PlaySound("QuadShotgunZombie/SingleFire", CHAN_WEAPON);
+      magazine++;
+      A_CustomBulletAttack(6, 6, 5, 3, "Bulletpuff");
+    }
+    QSZM E 6 A_FaceTarget();
+    QSZM E 0 A_JumpIf(magazine >= 4, "StartReload");
+    QSZM E 0 A_Jump(96, "Missile");
+    QSZM EE 6 A_FaceTarget();
+    Goto See;
+  QuadShot:
+    QSZM EEE 5 A_FaceTarget();
+    QSZM F 4 Bright
+    {
+      A_PlaySound("QuadShotgunZombie/QuadFire", CHAN_WEAPON);
+      magazine=4;
+      A_CustomBulletAttack(11, 11, 20, 3, "Bulletpuff");
+    }
+    QSZM EE 6 A_FaceTarget();
+    Goto StartReload;
+  StartReload:
+    QSZM E 0 { bNoPain=true; }
+    QSZM E 10 A_PlaySound("QuadShotgunZombie/Reload1", CHAN_7);
+  Reloading:
+    QSZM E 10
+    {
+      magazine--;
+      A_PlaySound("QuadShotgunZombie/Reload2", CHAN_6);
+    }
+    QSZM E 0 A_JumpIf(magazine > 0, "Reloading");
+    QSZM E 10 A_PlaySound("QuadShotgunZombie/Reload3", CHAN_7);
+    QSZM E 0 { bNoPain=false; }
+    Goto See;
+  Pain:
+    QSZM G 3;
+    QSZM G 3 A_Pain();
+    Goto See;
+  Death:
+    QSZM H 8;
+    QSZM I 8 A_Scream();
+    QSZM J 8 A_NoBlocking();
+    QSZM K 8;
+    QSZM L -1;
+    Stop;
+  XDeath:
+    QSZM M 5;
+    QSZM N 5 A_XScream();
+    QSZM O 5 A_NoBlocking();
+    QSZM PQRST 5;
+    QSZM U -1;
+    Stop;
+  Raise:
+    QSZM L 5;
+    QSZM KJIH 5;
+    Goto See;
+  }
+
+  state DecideToQuad()
+  {
+    //If we're full, close enough, and some randomness
+    if(magazine == 0 && CheckIfCloser(target, 384) && Random() < 64)
+      return ResolveState("QuadShot");
+    return ResolveState(null);
+  }
+}
+
+Class MaulerDemon : Actor
+{
+  Default
+  {
+    Tag "Mauler Demon";
+    Health 150;
+    PainChance 180;
+    Speed 10;
+    Radius 30;
+    Height 56;
+    Mass 400;
+    Damage 2; //Horns = pain. I say no more
+    SeeSound "demon/sight";
+    AttackSound "demon/melee";
+    PainSound "demon/pain";
+    DeathSound "demon/death";
+    ActiveSound "demon/active";
+    Obituary "%o was gored by a Mauler Demon.";
+    HitObituary "%o was mauled by a Mauler Demon";
+    Monster;
+    +FLOORCLIP
+  }
+
+  States
+  {
+  Spawn:
+    MAUD AB 10 A_Look();
+    Loop;
+  See:
+    MAUD AABBCCDD 2
+    { //Thanks to Blue Shadow for this routine
+      statelabel st = null; //Default to no missile state
+      if (CheckIfCloser(target, 224)) //If we're close enough to charge
+        st = "Missile"; //Then set missile state so we can charge
+      A_Chase("Melee", st); //And chase
+    }
+    Loop;
+  Melee:
+    MAUD EF 8 A_FaceTarget();
+    MAUD G 8 A_SargAttack();
+    Goto See;
+  Missile:
+    MAUD E 4 A_FaceTarget();
+    MAUD F 10 A_SkullAttack();
+    MAUD G 5 A_Gravity();
+    Goto See;
+  Pain:
+    MAUD H 2;
+    MAUD H 2 A_Pain();
+    Goto See;
+  Death:
+    MAUD I 8;
+    MAUD J 8 A_Scream();
+    MAUD K 4;
+    MAUD L 4 A_Fall();
+    MAUD M 4;
+    MAUD N -1;
+    Stop;
+  Raise:
+    MAUD N 5;
+    MAUD MLKJI 5;
+    Goto See;
+  }
+}
+
+Class LordofHeresy : Actor
+{
+  Default
+  {
+    Tag "Heresy Lord";
+    Health 1250;
+    Radius 20;
+    Height 56;
+    Speed 13;
+    PainChance 50;
+    BloodColor "7D 9D 59";
+    Mass 1000;
+    Obituary "%o was annihilated by the heresy lord.";
+    SeeSound "LordOfHeresy/sight";
+    PainSound "demon/pain";
+    DeathSound "LordOfHeresy/death";
+    ActiveSound "LordOfHeresy/act";
+    MONSTER;
+    +FLOORCLIP
+  }
+
+  States
+  {
+  Spawn:
+    LOHS AB 10 A_Look();
+    Loop;
+  See:
+    LOHS AABBCCDD 4 A_Chase();
+    Loop;
+  Missile:
+    LOHS E 0 A_Jump(85, "Missile2");
+    LOHS E 0 A_Jump(128, "Missile3");
+    LOHS EF 8 A_FaceTarget();
+    LOHS G 8 A_BruisAttack();
+    Goto See;
+  Missile2:
+    LOHS EF 8 A_FaceTarget();
+    LOHS G 8
+    {
+      A_SpawnProjectile("BaronBall", 32, 0,  8);
+      A_SpawnProjectile("BaronBall", 32, 0,  0);
+      A_SpawnProjectile("BaronBall", 32, 0, -8);
+    }
+    Goto See;
+  Missile3:
+    LOHS EF 8 A_FaceTarget();
+    LOHS G 8
+    {
+      A_SpawnProjectile("BaronBall", 32, 0, -20);
+      A_SpawnProjectile("BaronBall", 32, 0,   0);
+    }
+    LOHS EF 8 A_FaceTarget();
+    LOHS G 8
+    {
+      A_SpawnProjectile("BaronBall", 32, 0,  20);
+      A_SpawnProjectile("BaronBall", 32, 0,   0);
+    }
+    LOHS EF 8 A_FaceTarget();
+    LOHS G 8
+    {
+      A_SpawnProjectile("BaronBall", 32, 0, -12);
+      A_SpawnProjectile("BaronBall", 32, 0,  12);
+    }
+    Goto See;
+  Pain:
+    LOHS H 5;
+    LOHS H 5 A_Pain();
+    Goto See;
+  Death:
+    LOHS I 8;
+    LOHS J 8 A_Scream();
+    LOHS K 8 A_Fall();
+    LOHS LMN 8;
+    LOHS O -1;
+    Stop;
+  Raise:
+    LOHS ONMLKJI 5;
+    Goto See;
+  }
+}

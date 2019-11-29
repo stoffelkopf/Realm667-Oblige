@@ -13,4 +13,10 @@ DoomEdNums
 	10507 = ForgottenOne
 	10508 = BloodDemonClone
 	10509 = CGunSpider
+	10510 = cyberImp
+	10511 = Cybruiser
+	10512 = QuadShotgunZombie
+	10513 = RocketImp 
+	10514 = MaulerDemon
+	10515 = LordofHeresy
 }
