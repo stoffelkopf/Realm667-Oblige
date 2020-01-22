@@ -7,3 +7,6 @@ decal RocketImpScorch
 	randomflipx
 	randomflipy
 }
+
+generator CrackodemonBall CacoScorch
+generator Blusoul CacoScorch

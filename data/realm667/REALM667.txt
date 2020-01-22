@@ -559,3 +559,351 @@ Class LordofHeresy : Actor
     Goto See;
   }
 }
+
+Class Terminator : Actor
+{
+  Default
+  {
+    Health 5000;
+    Radius 24;
+    Height 64;
+    Mass 1500;
+    Speed 12;
+    PainChance 8;
+    scale 1.2;
+    Obituary "%o was liquidated by a Terminator.";
+    Damagefactor "Redblast", 0.0;
+    SeeSound "monster/termsit";
+    PainSound "monster/termpin";
+    DeathSound "monster/termdth";
+    ActiveSound "Terminator/termact";
+    MONSTER;
+    +FLOORCLIP
+    +MISSILEMORE
+    +BOSS
+    +DONTHARMCLASS
+    +NORADIUSDMG
+  }
+
+  States
+  {
+  Spawn:
+    TERM AB 10 A_Look();
+    Loop;
+  See:
+    TERM A 1 A_Playsound("Terminator/terstepA");
+    TERM A 3 A_Chase();
+    TERM ABB 4 A_Chase();
+    TERM C 1 A_Playsound("Terminator/terstepA");
+    TERM C 3 A_Chase();
+    TERM CDD 4 A_Chase();
+    Loop;
+  Pain:
+    TERM L 3;
+    TERM L 3 A_Pain();
+    Goto See;
+  Missile:
+    TERM E 0 A_Jump(192, "Missile2");
+    TERM E 8 A_FaceTarget();
+    TERM F 8 Bright A_SpawnProjectile("TerminatorBlaster",38,15,0,0);
+    TERM E 0 A_jump(128, "See");
+    TERM E 8 A_Spidrefire();
+    Goto Missile+1;
+  Missile2:
+    TERM G 0 A_Jump(160, "Missile3");
+    TERM G 2 A_Facetarget();
+    TERM H 1 Bright A_CustomBulletAttack (15, 8, 2, 4, "Terminatorpuff");
+    TERM H 1 Bright A_Playsound("Terminator/tershotB");
+    TERM G 2 A_Facetarget();
+    TERM I 1 Bright A_CustomBulletAttack (15, 8, 2, 4, "Terminatorpuff");
+    TERM I 1 Bright A_Playsound("Terminator/tershotB");
+    TERM G 0 A_jump(16, 2);
+    TERM G 1 A_Spidrefire();
+    Goto Missile2+2;
+  Missile3:
+    TERM J 0 A_Jump(128, "Missile4");
+    TERM J 8 A_Facetarget();
+    TERM K 8 Bright A_SpawnProjectile("Redstar", 38, -15, 0, 0);
+    Goto See;
+  Missile4:
+    TERM J 0 A_Jumpifcloser(192, "Missile5");
+    TERM J 8 A_Facetarget();
+    TERM K 8 Bright A_SpawnProjectile("Redgrenade", 38, -15, 0, 0);
+    Goto See;
+  Missile5:
+    TERM J 8 A_Facetarget();
+    TERM K 8 Bright A_SpawnProjectile("Redstar", 38, -15, 0, 0);
+    Goto See;
+  Death:
+    TERM M 6 A_Scream();
+    TERM N 4;
+    TERM OPQ 4 Bright;
+    TERM R 4 Bright
+    {
+      A_FaceTarget();
+      A_SpawnItemEx("TerminatorHead", 15, 0, 90, 10, 0, 0, -170, SXF_CLIENTSIDE);
+      A_SpawnItemEx("TerminatorShoulder", 60, 0, 75, 8, 0, 0, -70, SXF_CLIENTSIDE);
+      A_SpawnItemEx("TerminatorArm", 60, 0, 0, 3, 0, 0, -90, SXF_CLIENTSIDE);
+    }
+    TERM STUV 4 Bright;
+    TERM W 4;
+    TERM X 6 A_Fall();
+    TERM Y 6;
+    TERM Z 1 A_Playsound("Terminator/terstepA");
+    TERM Z 5;
+    TERM [ -1;
+    Stop;
+   }
+}
+
+Class TerminatorBlaster : Actor
+{
+  Default
+  {
+    Radius 8;
+    Height 12;
+    Speed 24;
+    Damage 15;
+    RENDERSTYLE "ADD";
+    alpha 0.85;
+    Decal "RevenantScorch";
+    SeeSound "monster/brufir";
+    DeathSound "weapons/hellex";
+    PROJECTILE;
+    +THRUGHOST
+  }
+   States
+   {
+   Spawn:
+      BLST A 1 Bright;
+      loop;
+   Death:
+      BLST B 6 Bright A_Explode(40,72, XF_HURTSOURCE); //Original had DONTHURTSHOOTER, but it was not used because this was doing >0 amounts of damage
+      BLST CDEFGHIJKL 3 Bright;
+      stop;
+   }
+}
+
+Class Redstar : Actor
+{
+  Default
+  {
+    Radius 10;
+    Height 20;
+    Speed 13;
+    Damage 10;
+    Scale 0.6;
+    RENDERSTYLE "ADD";
+    ALPHA 0.8;
+    Decal "CacoScorch";
+    SeeSound "Terminator/tershotA";
+    DeathSound "imp/shotx";
+    PROJECTILE;
+    +SEEKERMISSILE
+  }
+
+  States
+  {
+  Spawn:
+    STAR ABCD 3 Bright A_SeekerMissile (10,15);
+    Loop;
+  Death:
+    STAR EFGHIJKLMNO 3 Bright;
+    Stop;
+  }
+}
+
+Class Redgrenade : Actor
+{
+  Default
+  {
+    Radius 6;
+    Height 12;
+    Speed 20;
+    Damage 5;
+    RENDERSTYLE "ADD";
+    ALPHA 0.8;
+    DeathSound "imp/shotx";
+    PROJECTILE;
+    +DoomBounce
+    -NoGravity
+  }
+
+  States
+  {
+  Spawn:
+    TGND A 0;
+    TGND A 1 Bright Thrustthingz(0, 24, 0, 1);
+    TGND A 1 Bright A_Playsound("Terminator/tershotA");
+    TGND BBBBCCCCAAAA 1 Bright A_SpawnItemEx("grenadetrail", 0,0,0, 0,0,0, 0, SXF_CLIENTSIDE);
+    TGND A 0 A_JumpIfCloser(48, "Death");
+    Goto Spawn+3;
+  Death:
+    STAR E 3 Bright A_Explode(40,72,XF_HURTSOURCE);
+    STAR F 3 Bright
+    {
+      A_SpawnProjectile("grenadeblast",0,0,  0, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0, 20, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0, 40, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0, 60, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0, 80, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,100, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,120, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,140, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,160, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,180, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,200, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,220, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,240, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,260, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,280, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,300, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,320, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+      A_SpawnProjectile("grenadeblast",0,0,340, CMF_AIMDIRECTION | CMF_TRACKOWNER,0);
+    }
+    STAR GHIJKLMNO 3 Bright;
+    Stop;
+  }
+}
+
+Class Grenadetrail : Actor
+{
+  Default
+  {
+    Renderstyle "ADD";
+    Alpha 0.6;
+    DamageType "Redblast";
+       PROJECTILE;
+       +NOCLIP
+  }
+
+  States
+  {
+  Spawn:
+    TGTR ABCDEFGHI 4 Bright;
+    Stop;
+  }
+}
+
+
+Class Grenadeblast : Actor
+{
+  Default
+  {
+    Radius 6;
+    Height 12;
+    Speed 5;
+    Damage 4;
+    RENDERSTYLE "ADD";
+    ALPHA 0.8;
+    SeeSound "imp/attack";
+    DeathSound "imp/shotx";
+    PROJECTILE;
+    +Ripper
+  }
+
+  States
+  {
+  Spawn:
+    TGBL ABCDEFGHIJK 2 Bright;
+    stop;
+  }
+}
+
+
+Class Terminatorpuff : Bulletpuff
+{
+  Default
+  {
+    Renderstyle "ADD";
+    Alpha 0.75;
+    scale 0.75;
+    Decal "Bulletchip";
+  }
+
+  States
+  {
+  Spawn:
+  Melee:
+    TPUF A 2 Bright;
+    TPUF A 0 A_Jump(128, "Anim2");
+    TPUF BCDEFGH 2 Bright;
+    Stop;
+  Anim2:
+    TPUF IJKLMNO 2 Bright;
+    Stop;
+  }
+}
+
+Class TerminatorArm : Actor
+{
+  Default
+  {
+    Radius 12;
+    Height 15;
+    Speed 3;
+    Mass 1000;
+    scale 1.2;
+    +DOOMBOUNCE
+  }
+
+  States
+  {
+  Spawn:
+    TARM A 5;
+    TARM B 5 A_Fall();
+    TARM CDE 5;
+    TARM F -1;
+    Stop;
+  }
+}
+
+Class TerminatorHead : Actor
+{
+  Default
+  {
+    Radius 6;
+    Height 8;
+    Speed 10;
+    Mass 1000;
+    scale 1.2;
+    +DOOMBOUNCE
+    +DROPOFF
+    +Missile
+  }
+
+  States
+  {
+  Spawn:
+    THAD DEFGHABC 2;
+    loop;
+  Death:
+    THAD I -1;
+    loop;
+  }
+}
+
+Class TerminatorShoulder : Actor
+{
+  Default
+  {
+    Radius 8;
+    Height 8;
+    Speed 8;
+    Mass 1000;
+    scale 1.2;
+    +DOOMBOUNCE
+    +DROPOFF
+    +Missile
+  }
+
+  States
+  {
+  Spawn:
+    TSHO ABCDEFGH 2;
+    loop;
+  Death:
+    TSHO I -1;
+    loop;
+  }
+}

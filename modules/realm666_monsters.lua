@@ -82,6 +82,47 @@ REALM667.MONSTERS =
 		room_size = "medium"
 		infight_damage = 40
 	}	
+	CrackoDemon =
+	{
+		id = 10516 
+		r = 32
+		h = 52 
+		level = 3
+		boss_type = "minor"
+		boss_prob = 50
+		prob = 5
+		crazy_prob = 20
+		health = 1200
+		damage = 10
+		attack = "missile"
+		density = 0.6
+		weap_min_damage = 40
+		float = true
+		room_size = "medium"
+		infight_damage = 30
+	}	
+	---------------
+	--Bosses--
+	---------------	
+	Terminator =
+	{
+		id = 10517
+		r = 24
+		h = 64 
+		level = 7
+		boss_type = "tough"
+		boss_prob = 50
+		prob = 1.6
+		crazy_prob = 10
+		health = 5000
+		damage = 75
+		attack = "hitscan"
+		density = 0.1
+		weap_min_damage = 150	
+		room_size = "medium"
+		infight_damage = 30
+		infight_damage = 1000
+	}		
 	---------------
 	--Infantry--
 	---------------	
@@ -426,6 +467,25 @@ function REALM667.add_sounds()
 	gui.wad_insert_file("data/realm667/sounds/DSLOHACT.ogg","DSLOHACT");	
 	gui.wad_insert_file("data/realm667/sounds/DSLOHDTH.ogg","DSLOHDTH");	
 	gui.wad_insert_file("data/realm667/sounds/DSLOHSIT.ogg","DSLOHSIT");	
+-- Cracko Demon
+	gui.wad_insert_file("data/realm667/sounds/S_CRACKO.wav","S_CRACKO");	
+	gui.wad_insert_file("data/realm667/sounds/CRACKDTH.wav","CRACKDTH");	
+	gui.wad_insert_file("data/realm667/sounds/CRACKSEE.wav","CRACKSEE");	
+	gui.wad_insert_file("data/realm667/sounds/P_CRACKO.wav","P_CRACKO");	
+	gui.wad_insert_file("data/realm667/sounds/BLUSOSEE.wav","BLUSOSEE");	
+	gui.wad_insert_file("data/realm667/sounds/BLUSODTH.wav","BLUSODTH");		
+-- Terminator
+	gui.wad_insert_file("data/realm667/sounds/TSIGHT.ogg","TSIGHT");	
+	gui.wad_insert_file("data/realm667/sounds/DSTERACT.ogg","DSTERACT");	
+	gui.wad_insert_file("data/realm667/sounds/DSTEACT2.ogg","DSTEACT2");	
+	gui.wad_insert_file("data/realm667/sounds/DSTSTEP1.ogg","DSTSTEP1");	
+	gui.wad_insert_file("data/realm667/sounds/DSTSTEP2.ogg","DSTSTEP2");	
+	gui.wad_insert_file("data/realm667/sounds/DSBRUFIR.ogg","DSBRUFIR");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELLEX.ogg","DSHELLEX");	
+	gui.wad_insert_file("data/realm667/sounds/DSTSHOT1.ogg","DSTSHOT1");	
+	gui.wad_insert_file("data/realm667/sounds/DSTSHOT2.ogg","DSTSHOT2");	
+	gui.wad_insert_file("data/realm667/sounds/TPAIN1.ogg","TPAIN1");	
+	gui.wad_insert_file("data/realm667/sounds/TDEATH.ogg","TDEATH");		
 end
 
 function REALM667.add_brightmaps()
@@ -679,7 +739,106 @@ function REALM667.add_brightmaps()
 	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH7.png","BMLOHSH7");		
 	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSH8.png","BMLOHSH8");		
 	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSI0.png","BMLOHSI0");			
-	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSJ0.png","BMLOHSJ0");						
+	gui.wad_insert_file("data/realm667/brightmaps/BMLOHSJ0.png","BMLOHSJ0");	
+--Terminator
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMA1.png","BMTERMA1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMA2.png","BMTERMA2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMA3.png","BMTERMA3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMA6.png","BMTERMA6");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMA7.png","BMTERMA7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMA8.png","BMTERMA8");			
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMB1.png","BMTERMB1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMB2.png","BMTERMB2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMB3.png","BMTERMB3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMB7.png","BMTERMB7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMB8.png","BMTERMB8");	
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMC1.png","BMTERMC1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMC2.png","BMTERMC2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMC3.png","BMTERMC3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMC4.png","BMTERMC4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMC7.png","BMTERMC7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMC8.png","BMTERMC8");
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMD1.png","BMTERMD1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMD2.png","BMTERMD2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMD3.png","BMTERMD3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMD7.png","BMTERMD7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMD8.png","BMTERMD8");	
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERME1.png","BMTERME1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERME2.png","BMTERME2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERME3.png","BMTERME3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERME7.png","BMTERME7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERME8.png","BMTERME8");
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF1.png","BMTERMF1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF2.png","BMTERMF2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF3.png","BMTERMF3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF4.png","BMTERMF4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF5.png","BMTERMF5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF6.png","BMTERMF6");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF7.png","BMTERMF7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMF8.png","BMTERMF8");		
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMG1.png","BMTERMG1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMG2.png","BMTERMG2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMG3.png","BMTERMG3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMG7.png","BMTERMG7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMG8.png","BMTERMG8");		
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH1.png","BMTERMH1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH2.png","BMTERMH2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH3.png","BMTERMH3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH4.png","BMTERMH4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH5.png","BMTERMH5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH6.png","BMTERMH6");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH7.png","BMTERMH7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMH8.png","BMTERMH8");	
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI1.png","BMTERMI1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI2.png","BMTERMI2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI3.png","BMTERMI3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI4.png","BMTERMI4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI5.png","BMTERMI5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI6.png","BMTERMI6");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI7.png","BMTERMI7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMI8.png","BMTERMI8");	
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMJ1.png","BMTERMJ1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMJ2.png","BMTERMJ2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMJ3.png","BMTERMJ3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMJ7.png","BMTERMJ7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMJ8.png","BMTERMJ8");	
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMK1.png","BMTERMK1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMK2.png","BMTERMK2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMK3.png","BMTERMK3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMK4.png","BMTERMK4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMK5.png","BMTERMK5");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMK7.png","BMTERMK7");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMK8.png","BMTERMK8");	
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERML1.png","BMTERML1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERML2.png","BMTERML2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERML3.png","BMTERML3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERML4.png","BMTERML4");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERML8.png","BMTERML8");		
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMM0.png","BMTERMM0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMN0.png","BMTERMN0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMO0.png","BMTERMO0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMP0.png","BMTERMP0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMQ0.png","BMTERMQ0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMR0.png","BMTERMR0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMS0.png","BMTERMS0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMT0.png","BMTERMT0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMU0.png","BMTERMU0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMV0.png","BMTERMV0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMW0.png","BMTERMW0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMX0.png","BMTERMX0");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMY0.png","BMTERMY0");			
 end
 
 function REALM667.monster_setup(self)
@@ -827,5 +986,17 @@ OB_MODULES["realm667_monster_control"] =
         choices=REALM667.CONTROL_CHOICES
 		default="none"
     }		
+	CrackoDemon =
+    {
+		label="Cracko Demon",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }			
+	Terminator =
+    {
+		label="Terminator",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }			
   }
  }

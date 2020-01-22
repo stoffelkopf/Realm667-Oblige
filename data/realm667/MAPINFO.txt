@@ -19,4 +19,6 @@ DoomEdNums
 	10513 = RocketImp 
 	10514 = MaulerDemon
 	10515 = LordofHeresy
+	10516 = CrackoDemon
+	10517 = Terminator
 }
