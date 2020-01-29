@@ -1086,3 +1086,182 @@ Actor BlusoulTrail
         loop
     }
 }
+
+actor SupremeFiend
+{
+    //$Category monsters
+    Tag "Supreme Fiend"
+    Health 3500
+    Radius 40
+    Height 95
+    Speed 8
+    PainChance 10
+    Mass 1000
+    MONSTER
+    +BOSS
+    +NOGRAVITY
+    +FLOAT
+    +FLOATBOB
+    +NORADIUSDMG
+    +DONTMORPH
+    +MISSILEMORE
+    SeeSound "fiend/see"
+    DeathSound "spider/death"
+    Obituary "%o was mangled by the Supreme Fiend."
+    States
+    {
+    Spawn:
+	SUPR A 4 A_Look
+	Loop
+    See:
+	SUPR A 0 A_PlaySound("fiend/hover")
+	SUPR AAAA 2 A_Chase
+	Loop
+    Missile:
+	SUPR B 0 A_Jump(96, 23)
+	SUPR B 0 A_Jump(96, 31)
+	SUPR B 0 A_PlaySound("fiend/hover") //Plasma
+	SUPR B 8 bright A_FaceTarget
+	SUPR B 0 A_PlaySound("fiend/hover")
+	SUPR B 8 bright A_FaceTarget
+	SUPR F 2 bright A_CustomMissile (FiendPlasmaBall, 30, 0, 0)
+	SUPR E 2 bright
+	SUPR B 1 bright A_SpidRefire
+	SUPR F 2 bright A_CustomMissile (FiendPlasmaBall, 30, 0, 0)
+	SUPR E 2 bright
+	SUPR B 1 bright A_SpidRefire
+	SUPR F 2 bright A_CustomMissile (FiendPlasmaBall, 30, 0, 0)
+	SUPR E 2 bright
+	SUPR B 1 bright A_SpidRefire
+	SUPR F 2 bright A_CustomMissile (FiendPlasmaBall, 30, 0, 0)
+	SUPR E 2 bright
+	SUPR B 1 bright A_SpidRefire
+	SUPR F 2 bright A_CustomMissile (FiendPlasmaBall, 30, 0, 0)
+	SUPR E 2 bright
+	SUPR B 1 bright A_SpidRefire
+	SUPR F 2 bright A_CustomMissile (FiendPlasmaBall, 30, 0, 0)
+	goto Missile
+	SUPR B 0 A_PlaySound("fiend/hover") //BFG
+	SUPR B 8 bright A_FaceTarget
+	SUPR B 0 A_PlaySound("fiend/hover")
+	SUPR B 5 bright A_FaceTarget
+	SUPR B 10 bright A_PlayWeaponSound ("fiend/bfg")
+	SUPR E 10 bright A_FaceTarget
+	SUPR F 10 bright A_CustomMissile ("BFGBall", 30, 0, 0)
+	goto See
+	SUPR B 10 bright A_FaceTarget
+	SUPR B 0 A_PlayWeaponSound("fiend/bomb")
+	SUPR O 20 bright A_FaceTarget
+	SUPR P 20 bright A_FaceTarget
+	SUPR Q 20 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 10 bright A_FaceTarget
+	SUPR Q 0 A_DualPainAttack ("RemoteBomb")
+	SUPR Q 0 A_PlayWeaponSound("fiend/bomb")
+	SUPR Q 20 bright A_FaceTarget
+	SUPR P 20 bright A_FaceTarget
+	SUPR O 20 bright A_FaceTarget
+	goto See
+    Death:
+	SUPR G 0 A_ChangeFlag (FLOATBOB, 0)
+	SUPR G 10 A_Scream
+	SUPR H 10
+	SUPR I 10 A_Fall
+	SUPR JKLM 10
+	SUPR N -1 A_BossDeath
+	Stop
+    }
+}
+
+actor RemoteBomb 22100
+{
+  //$Category monsters
+  Tag "Remote Bomb"
+  obituary "%o was destroyed by a remote bomb."
+  health 5
+  radius 20
+  height 20
+  mass 20
+  speed 15
+  painchance 20
+  seesound "prox/fire"
+  attacksound "prox/beep"
+  deathsound "weapons/rocklx"
+  MONSTER
+  +FLOAT
+  +FLOATBOB
+  +NOTARGETSWITCH
+  +NOGRAVITY
+  +LOOKALLAROUND
+  +NOBLOOD
+  states
+  {
+  Spawn:
+    BOMB AABB 10 A_Look
+    loop
+  See:
+    BOMB AABB 2 A_Chase
+    BOMB A 0 A_PlaySound("bomb/beep")
+    loop
+  Melee:
+    BOMB A 0 A_Die
+    stop
+  Pain:
+    BOMB A 3
+    BOMB A 3 A_Pain
+    goto See
+  Death:
+    MISL B 0 bright A_Explode (50, 128)
+    MISL B 5 bright A_PlaySound ("weapons/rocklx")
+    MISL C 5 A_NoBlocking
+    MISL D 5
+    stop
+  }
+}
+
+
+actor FiendPlasmaBall : PlasmaBall
+{
+  Decal ArachnotronScorch
+  States
+  {
+  Spawn:
+    APLS AB 6 Bright
+    Loop
+  Death:
+    APBX ABCDE 4 Bright
+    Stop
+  }
+}

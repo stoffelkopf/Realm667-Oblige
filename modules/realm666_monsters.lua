@@ -101,6 +101,25 @@ REALM667.MONSTERS =
 		room_size = "medium"
 		infight_damage = 30
 	}	
+	Helemental =
+	{
+		id = 10520 
+		r = 34
+		h = 64 
+		level = 3
+		boss_type = "minor"
+		boss_prob = 50
+		prob = 5
+		crazy_prob = 20
+		health = 1600
+		damage = 8
+		attack = "missile"
+		density = 0.6
+		weap_min_damage = 40
+		float = true
+		room_size = "medium"
+		infight_damage = 25
+	}		
 	---------------
 	--Bosses--
 	---------------	
@@ -116,12 +135,52 @@ REALM667.MONSTERS =
 		crazy_prob = 10
 		health = 5000
 		damage = 75
-		attack = "hitscan"
+		attack = "missile"
 		density = 0.1
 		weap_min_damage = 150	
 		room_size = "medium"
 		infight_damage = 30
 		infight_damage = 1000
+	}		
+	SupremeFiend =
+	{
+		id = 10518
+		r = 40
+		h = 95 
+		level = 4
+		boss_type = "tough"
+		boss_prob = 50
+		prob = 3
+		crazy_prob = 15
+		health = 3500
+		damage = 35
+		attack = "hitscan"
+		density = 0.1
+		weap_min_damage = 150	
+		room_size = "medium"
+		infight_damage = 30
+		float = true
+		infight_damage = 100
+	}	
+	OverLord =
+	{
+		id = 10519
+		r = 43
+		h = 90 
+		level = 4
+		boss_type = "tough"
+		boss_prob = 50
+		prob = 3
+		crazy_prob = 15
+		health = 3500
+		damage = 50
+		attack = "hitscan"
+		density = 0.1
+		weap_min_damage = 150	
+		room_size = "medium"
+		infight_damage = 30
+		float = true
+		infight_damage = 100
 	}		
 	---------------
 	--Infantry--
@@ -485,7 +544,39 @@ function REALM667.add_sounds()
 	gui.wad_insert_file("data/realm667/sounds/DSTSHOT1.ogg","DSTSHOT1");	
 	gui.wad_insert_file("data/realm667/sounds/DSTSHOT2.ogg","DSTSHOT2");	
 	gui.wad_insert_file("data/realm667/sounds/TPAIN1.ogg","TPAIN1");	
-	gui.wad_insert_file("data/realm667/sounds/TDEATH.ogg","TDEATH");		
+	gui.wad_insert_file("data/realm667/sounds/TDEATH.ogg","TDEATH");			
+-- Supreme Fiend
+	gui.wad_insert_file("data/realm667/sounds/DSHOVER.wav","DSHOVER");	
+	gui.wad_insert_file("data/realm667/sounds/DSFBOMB.wav","DSFBOMB");	
+	gui.wad_insert_file("data/realm667/sounds/DSFBFG1.wav","DSFBFG1");	
+	gui.wad_insert_file("data/realm667/sounds/DSFBFG2.wav","DSFBFG2");	
+	gui.wad_insert_file("data/realm667/sounds/DSFIEND.wav","DSFIEND");	
+	gui.wad_insert_file("data/realm667/sounds/DSBEEEP.wav","DSBEEEP");	
+	gui.wad_insert_file("data/realm667/sounds/DSIGPRXF.wav","DSIGPRXF");		
+	gui.wad_insert_file("data/realm667/sounds/DSIGPRXB.wav","DSIGPRXB");	
+-- Overlord
+	gui.wad_insert_file("data/realm667/sounds/DSCHAOFI.ogg","DSCHAOFI");	
+	gui.wad_insert_file("data/realm667/sounds/DSDEVZAP.ogg","DSDEVZAP");	
+	gui.wad_insert_file("data/realm667/sounds/DSDEVEXP.ogg","DSDEVEXP");	
+	gui.wad_insert_file("data/realm667/sounds/DSDEMBIT.ogg","DSDEMBIT");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELTEL.ogg","DSHELTEL");	
+	gui.wad_insert_file("data/realm667/sounds/DSOVLDTH.ogg","DSOVLDTH");	
+	gui.wad_insert_file("data/realm667/sounds/DSOVLPAI.ogg","DSOVLPAI");	
+	gui.wad_insert_file("data/realm667/sounds/DSOVLACT.ogg","DSOVLACT");	
+	gui.wad_insert_file("data/realm667/sounds/DSOVLSIT.ogg","DSOVLSIT");	
+	gui.wad_insert_file("data/realm667/sounds/DSSHOCK.ogg","DSSHOCK");	
+	gui.wad_insert_file("data/realm667/sounds/DSHADDTH.ogg","DSHADDTH");	
+	gui.wad_insert_file("data/realm667/sounds/DSHADEXP.ogg","DSHADEXP");	
+	gui.wad_insert_file("data/realm667/sounds/DSHADSIT.ogg","DSHADSIT");	
+	gui.wad_insert_file("data/realm667/sounds/DSHADTEL.ogg","DSHADTEL");	
+	gui.wad_insert_file("data/realm667/sounds/DSHADWLK.ogg","DSHADWLK");	
+-- Hades Elemental
+	gui.wad_insert_file("data/realm667/sounds/DSDEVZAP.ogg","DSDEVZAP");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELAC1.ogg","DSHELAC1");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELAC2.ogg","DSHELAC2");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELDTH.ogg","DSHELDTH");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELPAI.ogg","DSHELPAI");	
+	gui.wad_insert_file("data/realm667/sounds/DSHELSIT.ogg","DSHELSIT");		
 end
 
 function REALM667.add_brightmaps()
@@ -838,7 +929,64 @@ function REALM667.add_brightmaps()
 	gui.wad_insert_file("data/realm667/brightmaps/BMTERMV0.png","BMTERMV0");		
 	gui.wad_insert_file("data/realm667/brightmaps/BMTERMW0.png","BMTERMW0");		
 	gui.wad_insert_file("data/realm667/brightmaps/BMTERMX0.png","BMTERMX0");		
-	gui.wad_insert_file("data/realm667/brightmaps/BMTERMY0.png","BMTERMY0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMTERMY0.png","BMTERMY0");	
+-- Hades Elemental
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEA1.png","BMHELEA1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEA2.png","BMHELEA2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEA3.png","BMHELEA3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEA4.png","BMHELEA4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEA5.png","BMHELEA5");		
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEB1.png","BMHELEB1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEB2.png","BMHELEB2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEB3.png","BMHELEB3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEB4.png","BMHELEB4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEB5.png","BMHELEB5");	
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEC1.png","BMHELEC1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEC2.png","BMHELEC2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEC3.png","BMHELEC3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEC4.png","BMHELEC4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEC5.png","BMHELEC5");		
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELED1.png","BMHELED1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELED2.png","BMHELED2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELED3.png","BMHELED3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELED4.png","BMHELED4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELED5.png","BMHELED5");	
+
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEE1.png","BMHELEE1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEE2.png","BMHELEE2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEE3.png","BMHELEE3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEE4.png","BMHELEE4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEE5.png","BMHELEE5");		
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEF1.png","BMHELEF1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEF2.png","BMHELEF2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEF3.png","BMHELEF3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEF4.png","BMHELEF4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEF5.png","BMHELEF5");			
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEG1.png","BMHELEG1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEG2.png","BMHELEG2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEG3.png","BMHELEG3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEG4.png","BMHELEG4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEG5.png","BMHELEG5");			
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEH1.png","BMHELEH1");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEH2.png","BMHELEH2");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEH3.png","BMHELEH3");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEH4.png","BMHELEH4");		
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEH5.png","BMHELEH5");		
+	
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEI0.png","BMHELEI0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEJ0.png","BMHELEJ0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEK0.png","BMHELEK0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEL0.png","BMHELEL0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEM0.png","BMHELEM0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEN0.png","BMHELEN0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEO0.png","BMHELEO0");			
+	gui.wad_insert_file("data/realm667/brightmaps/BMHELEP0.png","BMHELEP0");				
 end
 
 function REALM667.monster_setup(self)
@@ -962,7 +1110,7 @@ OB_MODULES["realm667_monster_control"] =
     }	
 	QuadShotgunZombie =
 	{
-		label="Quad-Shotgun Zombie",
+		label="Quad-Shot Zombie",
         choices=REALM667.CONTROL_CHOICES
 		tooltip="A zombie with a Quad-Shotgun."
 		default="none"	
@@ -997,6 +1145,24 @@ OB_MODULES["realm667_monster_control"] =
 		label="Terminator",
         choices=REALM667.CONTROL_CHOICES
 		default="none"
-    }			
+    }
+	SupremeFiend = 
+    {
+		label="Supreme Fiend",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }	
+	OverLord = 
+    {
+		label="OverLord",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }	
+	Helemental	 = 
+    {
+		label="Hades Elemental",
+        choices=REALM667.CONTROL_CHOICES
+		default="none"
+    }	
   }
  }

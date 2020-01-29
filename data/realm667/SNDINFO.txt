@@ -119,3 +119,41 @@ terstep2		 dststep2
 Terminator/terstepB dststep3
 Terminator/tershotA dstshot1
 Terminator/tershotB dstshot2
+
+//SupremeFiend
+fiend/hover		  DSHOVER
+fiend/see		  DSFIEND
+fiend/bfg		  DSFBFG1
+fiend/bfg2		  DSFBFG2
+fiend/bomb		  DSFBOMB
+
+//Prox Sounds (from Infernux Grand)
+prox/fire		  DSIGPRXF
+prox/beep		  DSIGPRXB
+
+//Bomb
+bomb/beep DSBEEEP
+
+weapons/devexp                dsdevexp
+weapons/devzap                dsdevzap
+monster/ovlsit                  dsovlsit
+monster/ovlact                  dsovlact
+monster/ovlpai                  dsovlpai
+monster/ovldth                  dsovldth
+monster/hadsit                dshadsit
+monster/haddth                dshaddth
+monster/hadexp                dshadexp
+monster/hadtel                dshadtel
+monster/hadwlk                dshadwlk
+monster/heltel                  dsheltel
+caco/melee                    dsdembit
+weapons/gntidl                dsgntidl
+weapons/chaofi                dschaofi
+weapons/shock                 dsshock
+
+monster/helsit                dshelsit
+monster/helac1                dshelac1
+monster/helac2                dshelac2
+$random monster/helact 	      { monster/helac1 monster/helac2 }
+monster/helpai                dshelpai
+monster/heldth                dsheldth

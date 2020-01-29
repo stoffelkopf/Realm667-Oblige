@@ -21,4 +21,7 @@ DoomEdNums
 	10515 = LordofHeresy
 	10516 = CrackoDemon
 	10517 = Terminator
+	10518 = SupremeFiend 
+	10519 = OverLord
+	10520 = Helemental
 }
