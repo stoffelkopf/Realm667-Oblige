@@ -139,7 +139,6 @@ REALM667.MONSTERS =
 		density = 0.1
 		weap_min_damage = 150	
 		room_size = "medium"
-		infight_damage = 30
 		infight_damage = 1000
 	}		
 	SupremeFiend =
@@ -1158,7 +1157,7 @@ OB_MODULES["realm667_monster_control"] =
         choices=REALM667.CONTROL_CHOICES
 		default="none"
     }	
-	Helemental	 = 
+	Helemental = 
     {
 		label="Hades Elemental",
         choices=REALM667.CONTROL_CHOICES
