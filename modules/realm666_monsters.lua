@@ -1,14 +1,13 @@
 REALM667 = {}
-
+REALM667.PARAMETERS = 
+{
+	brutaloblige = false;
+}   
 REALM667.MONSTERS =
 {
-	--------------
-	--Tough Bosses
-	--------------
-	
-	--------------
-	--Mini Bosses
-	--------------	
+	---------------
+	--Mini Bosses--
+	---------------	
 	AracnorbQueen =
 	{
 		id = 10502
@@ -120,9 +119,9 @@ REALM667.MONSTERS =
 		room_size = "medium"
 		infight_damage = 25
 	}		
-	---------------
+	----------
 	--Bosses--
-	---------------	
+	----------	
 	Terminator =
 	{
 		id = 10517
@@ -181,16 +180,16 @@ REALM667.MONSTERS =
 		float = true
 		infight_damage = 100
 	}		
-	---------------
+	------------
 	--Infantry--
-	---------------	
+	------------	
 	Arachnophyte =
 	{
 		id = 10501
 		r = 64
 		h = 100
-		level = 3
-		prob = 20
+		level = 5
+		prob = 11
 		health = 500
 		damage = 50
 		attack = "hitscan"
@@ -310,7 +309,7 @@ REALM667.MONSTERS =
 		r = 20
 		h = 56 
 		level = 1
-		prob = 80
+		prob = 70
 		health = 100
 		damage = 5
 		attack = "missile"
@@ -324,8 +323,8 @@ REALM667.MONSTERS =
 		id = 10512
 		r = 20
 		h = 56 
-		level = 1
-		prob = 70
+		level = 3
+		prob = 60
 		health = 140
 		damage = 4
 		attack = "hitscan"
@@ -358,7 +357,7 @@ REALM667.MONSTERS =
 		r = 30
 		h = 56 
 		level = 1
-		prob = 50
+		prob = 30
 		health = 150
 		damage = 2
 		attack = "melee"
@@ -373,51 +372,37 @@ REALM667.MONSTERS =
 
 REALM667.CONTROL_CHOICES =
 {
-  "none",    "None at all",
-  "default", "DEFAULT",  
-  "scarce",  "Scarce",
-  "less",    "Less",
-  "plenty",  "Plenty",
-  "more",    "More",
-  "heaps",   "Heaps",
-  "insane",  "INSANE",
+	"none",    "None at all",
+	"default", "DEFAULT",  
+	"scarce",  "Scarce",
+	"less",    "Less",
+	"plenty",  "Plenty",
+	"more",    "More",
+	"heaps",   "Heaps",
+	"insane",  "INSANE",
 }
 
 REALM667.MON_PROBS =
 {
-  none   = 0
-  scarce = 2
-  less   = 15
-  plenty = 50
-  more   = 120
-  heaps  = 300
-  insane = 2000
+	none   = 0
+	scarce = 2
+	less   = 15
+	plenty = 50
+	more   = 120
+	heaps  = 300
+	insane = 2000
 }
 
 REALM667.DENSITIES =
 {
-  none   = 0.1
-  scarce = 0.2
-  less   = 0.4
-  plenty = 0.7
-  more   = 1.2
-  heaps  = 3.3
-  insane = 9.9
+	none   = 0.1
+	scarce = 0.2
+	less   = 0.4
+	plenty = 0.7
+	more   = 1.2
+	heaps  = 3.3
+	insane = 9.9
 }
-
- function REALM667.gameinfo()
-
-  -- local data =
-	-- {
-	  -- '//ZDoom GAMEINFO lump for Brutal Oblige\n'
-	  -- 'IWAD="Doom2.wad"\n'
-	-- }
-
-  -- table.insert(data,'LOAD="brutalv20b.pk3","hellonearthstarterpack.wad","bfriend1.pk3"\n')
--- --no harm in loading the starterpack wad if not used and throws no error if not found so load it regardless of if that module's actually being used
-
-  -- gui.wad_add_text_lump("GAMEINFO", data);
- end
 
 function REALM667.all_done()
 	REALM667.add_files();
@@ -425,20 +410,50 @@ function REALM667.all_done()
 	REALM667.add_brightmaps()
 end
 
+function table.containsKey_667(table, key)
+	for value, _ in pairs(table) do
+		if value == key then
+			return true
+        end
+    end
+    return false
+end
+
+function REALM667.check_brutaldoom()
+	gui.printf('\nLoading Realm667 Addon\n\n');
+	if table.containsKey_667(OB_GAMES,"brutaldoom") then
+		gui.printf('BrutalOblige Addon found.\n');
+		if OB_CONFIG.game == "brutaldoom" then 
+			REALM667.PARAMETERS.brutaloblige = true;
+			gui.printf('BrutalOblige Addon is active.\n');
+		else
+			REALM667.PARAMETERS.brutaloblige = false;
+			gui.printf('BrutalOblige Addon is inactive.\n');
+		end
+	else
+		gui.printf("BrutalOblige Addon doesn't exist.\n");
+		REALM667.PARAMETERS.brutaloblige = false;
+	end
+end
+
 function REALM667.add_files()
-    --OB_CONFIG.game
-	gui.wad_merge_sections("data/realm667/monsters.wad");
-	gui.wad_insert_file("data/realm667/GLDEFS.txt","GLDEFS");
-	gui.wad_insert_file("data/realm667/DECORATE.txt","DECORATE");
-	gui.wad_insert_file("data/realm667/DECALDEF.txt","DECALDEF");		
-	gui.wad_insert_file("data/realm667/MAPINFO.txt","MAPINFO");
-	gui.wad_insert_file("data/realm667/REALM667.txt","REALM667");
-	gui.wad_insert_file("data/realm667/SNDINFO.txt","SNDINFO");
-	gui.wad_insert_file("data/realm667/ZSCRIPT.txt","ZSCRIPT");	
+	if REALM667.PARAMETERS.brutaloblige == true then
+		gui.wad_insert_file("data/realm667/DECORATE.txt","DECORATE");
+		gui.wad_insert_file("data/realm667/REALM667.txt","REALM667");	
+		gui.wad_merge_sections("data/realm667/monsters.wad");		
+	else
+		gui.wad_insert_file("data/realm667/GLDEFS.txt","GLDEFS");
+		gui.wad_insert_file("data/realm667/DECORATE.txt","DECORATE");
+		gui.wad_insert_file("data/realm667/DECALDEF.txt","DECALDEF");		
+		gui.wad_insert_file("data/realm667/MAPINFO.txt","MAPINFO");
+		gui.wad_insert_file("data/realm667/REALM667.txt","REALM667");
+		gui.wad_insert_file("data/realm667/SNDINFO.txt","SNDINFO");
+		gui.wad_insert_file("data/realm667/ZSCRIPT.txt","ZSCRIPT");	
+		gui.wad_merge_sections("data/realm667/monsters.wad");
+	end
 end
 
 function REALM667.add_sounds()
-
 -- Arachnophyte
 	gui.wad_insert_file("data/realm667/sounds/DSAPHDTH.ogg","DSAPHDTH");
 	gui.wad_insert_file("data/realm667/sounds/DSAPHENG.ogg","DSAPHENG");
@@ -579,7 +594,6 @@ function REALM667.add_sounds()
 end
 
 function REALM667.add_brightmaps()
-
 -- BFGGuy
 	gui.wad_insert_file("data/realm667/brightmaps/BMBFGZA1.png","BMBFGZA1");		
 	gui.wad_insert_file("data/realm667/brightmaps/BMBFGZA2.png","BMBFGZA2");		
@@ -989,179 +1003,179 @@ function REALM667.add_brightmaps()
 end
 
 function REALM667.monster_setup(self)
-  for name,opt in pairs(self.options) do
-    local M = GAME.MONSTERS[name]
-
-    if M and opt.value != "default" then
-      M.prob    = REALM667.MON_PROBS[opt.value]
-      M.density = REALM667.DENSITIES[opt.value]
-
-      -- allow Spectres to be controlled individually
-      M.replaces = nil
-
-      -- loosen some of the normal restrictions
-      M.skip_prob = nil
-      M.crazy_prob = nil
-
-      if M.prob > 40 then
-        M.level = 1
-        M.min_weapon = nil
-      end
-
-      if M.prob > 200 then
-        M.boss_type = nil
-      end
-    end
-  end -- for opt
+	REALM667.check_brutaldoom();
+	for name,opt in pairs(self.options) do
+		local M = GAME.MONSTERS[name]
+		if M and opt.value != "default" then
+			M.prob = REALM667.MON_PROBS[opt.value]
+			M.density = REALM667.DENSITIES[opt.value]
+			-- allow Spectres to be controlled individually
+			M.replaces = nil
+			-- loosen some of the normal restrictions
+			M.skip_prob = nil
+			M.crazy_prob = nil
+			if M.prob > 40 then
+				M.level = 1
+				M.min_weapon = nil
+			end
+			if M.prob > 200 then
+				M.boss_type = nil
+			end
+		end
+	end
 end
-
 
 OB_MODULES["realm667_monster_control"] =
 {
-  label = _("Realm667 Monster Control")
-  game = {doom1=1, doom2=1}
-  
-  engine = { zdoom=1, gzdoom=1, skulltag=1}
-
-  tables =
-  {
-    REALM667
-  }
-
-  hooks =
-  {
-    setup = REALM667.monster_setup
-    all_done	= REALM667.all_done	
-  }
-   
-  options =
-  {
- 	Arachnophyte =
-    {
-		label="Arachnophyte",
-        choices=REALM667.CONTROL_CHOICES
-        tooltip="A flying, weaker version of the Spider Mastermind. Does as much damage and is more mobile, but has less health."
-		default="none"
-    }
-	AracnorbQueen =
-    {
-		label="Aracnorb Queen",
-        choices=REALM667.CONTROL_CHOICES
-        tooltip="The mother of all the Aracnorbs. The Queen can project multiple forms of plasma attack, including a stream, scatter shot, or a powerful homing shot."
-		default="none"
-    }	
-	BFGGuy =
-    {
-		label="BFG Commando",
-        choices=REALM667.CONTROL_CHOICES
-        tooltip="A BFG wielding Zombie Commando."
-		default="none"
-    }
-	Cyberbaron =
-    {
-		label="Cyber Baron",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	Haedexebus =
-    {
-		label="Haedexebus",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }		
-	Terror =
-    {
-		label="Terror",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	ForgottenOne =
-    {
-		label="Forgotten One",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	BloodDemonClone =
-    {
-		label="Blood Demon",
-        choices=REALM667.CONTROL_CHOICES
-		tooltip="A stronger version of Doom's Demon."
-		default="none"
-    }	
-	CGunSpider =
-    {
-		label="Chaingun Spider",
-        choices=REALM667.CONTROL_CHOICES
-		tooltip="A Arachnotron with a Chaingun."
-		default="none"
-    }	
-	cyberImp = 
-    {
-		label="Cyber Imp",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	Cybruiser =
-    {
-		label="Cybruiser",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	QuadShotgunZombie =
-	{
-		label="Quad-Shot Zombie",
-        choices=REALM667.CONTROL_CHOICES
-		tooltip="A zombie with a Quad-Shotgun."
-		default="none"	
+	label = _("Realm667 Monster Control")
+	game = {
+		doom1=1, 
+		doom2=1, 
+		brutaldoom=1
+	} 
+	engine = { 
+		zdoom=1, 
+		gzdoom=1, 
+		skulltag=1, 
+		nolimit=1
 	}
-	RocketImp = 
-    {
-		label="Rocket Imp",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-		tooltip="A cyborg imp with dual rocket launchers."
-    }	
-    MaulerDemon	=
-    {
-		label="Mauler Demon",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	LordofHeresy =
-    {
-		label="Heresy Lord",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }		
-	CrackoDemon =
-    {
-		label="Cracko Demon",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }			
-	Terminator =
-    {
-		label="Terminator",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }
-	SupremeFiend = 
-    {
-		label="Supreme Fiend",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	OverLord = 
-    {
-		label="OverLord",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-	Helemental = 
-    {
-		label="Hades Elemental",
-        choices=REALM667.CONTROL_CHOICES
-		default="none"
-    }	
-  }
- }
+	tables =
+	{
+		REALM667
+	}
+	hooks =
+	{
+		setup = REALM667.monster_setup
+		all_done = REALM667.all_done	
+	}   
+	options =
+	{
+		Arachnophyte =
+		{
+			label="Arachnophyte",
+			choices=REALM667.CONTROL_CHOICES
+			tooltip="A flying, weaker version of the Spider Mastermind. Does as much damage and is more mobile, but has less health."
+			default="none"
+		}
+		AracnorbQueen =
+		{
+			label="Aracnorb Queen",
+			choices=REALM667.CONTROL_CHOICES
+			tooltip="The mother of all the Aracnorbs. The Queen can project multiple forms of plasma attack, including a stream, scatter shot, or a powerful homing shot."
+			default="none"
+		}	
+		BFGGuy =
+		{
+			label="BFG Commando",
+			choices=REALM667.CONTROL_CHOICES
+			tooltip="A BFG wielding Zombie Commando."
+			default="none"
+		}
+		Cyberbaron =
+		{
+			label="Cyber Baron",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		Haedexebus =
+		{	
+			label="Haedexebus",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}		
+		Terror =
+		{
+			label="Terror",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		ForgottenOne =
+		{
+			label="Forgotten One",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		BloodDemonClone =
+		{
+			label="Blood Demon",
+			choices=REALM667.CONTROL_CHOICES
+			tooltip="A stronger version of Doom's Demon."
+			default="none"
+		}	
+		CGunSpider =
+		{
+			label="Chaingun Spider",
+			choices=REALM667.CONTROL_CHOICES
+			tooltip="A Arachnotron with a Chaingun."
+			default="none"
+		}	
+		cyberImp = 
+		{
+			label="Cyber Imp",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		Cybruiser =
+		{
+			label="Cybruiser",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		QuadShotgunZombie =
+		{
+			label="Quad-Shot Zombie",
+			choices=REALM667.CONTROL_CHOICES
+			tooltip="A zombie with a Quad-Shotgun."
+			default="none"	
+		}
+		RocketImp = 
+		{
+			label="Rocket Imp",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+			tooltip="A cyborg imp with dual rocket launchers."
+		}	
+		MaulerDemon	=
+		{
+			label="Mauler Demon",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		LordofHeresy =
+		{
+			label="Heresy Lord",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}		
+		CrackoDemon =
+		{
+			label="Cracko Demon",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}			
+		Terminator =
+		{
+			label="Terminator",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}
+		SupremeFiend = 
+		{
+			label="Supreme Fiend",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		OverLord = 
+		{
+			label="OverLord",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+		Helemental = 
+		{
+			label="Hades Elemental",
+			choices=REALM667.CONTROL_CHOICES
+			default="none"
+		}	
+	}
+}
