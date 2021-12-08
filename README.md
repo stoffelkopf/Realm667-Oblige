@@ -1,19 +1,36 @@
+#Realm667 Oblige
 
 For those of you who don't know [Oblige](http://oblige.sourceforge.net/) is a random map generator for Doom. It's really good and you should check it out.
-Something you also might not know is that brutaldoomv20b.pk3 contains a lot of stuff that you don't always get to play with, including monsters and weapons. With this in mind I made an addon to tell Oblige all about Brutal Doom's extra goodies and how to use them in maps.
 
 **Features**
 
-* New monsters: from Realm667
-
-
-Todo....
-
+* Monsters from Realm667 (https://realm667.com)
+* Arachnophyte
+* AracnorbQueen
+* BFGGuy
+* Cyberbaron
+* Haedexebus
+* Terror
+* ForgottenOne
+* BloodDemonClone
+* CGunSpider
+* CyberImp
+* Cybruiser
+* QuadShotgunZombie
+* RocketImp 
+* MaulerDemon
+* LordofHeresy
+* CrackoDemon
+* Terminator
+* SupremeFiend 
+* OverLord
+* Helemental
+* Probability of each of the new monsters can be tweaked or switched off completely
 
 
 **How to use - Latest development version**
 
-1) Download Oblige if you haven't already and make sure you have the latest supported Brutal Doom. See below for current supported versions.
+1) Download Oblige 7.70 if you haven't already
 
 2) Download or clone this repository.
 
