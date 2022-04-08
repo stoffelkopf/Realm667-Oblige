@@ -26,6 +26,7 @@ For those of you who don't know [Oblige](http://oblige.sourceforge.net/) is a ra
 * OverLord
 * Helemental
 * Probability of each of the new monsters can be tweaked or switched off completely
+* Support for other Oblige Addon [BrutalOblige](https://github.com/stoffelkopf/BrutalOblige)
 
 
 **How to use - Latest development version**
@@ -53,7 +54,9 @@ Note that if you downloaded this from gitlab rather than cloning the repo you ca
 
 7) Load this wad **after** all other wads
 
-8) Happy bug hunting.
+8) Happy hunting.
 
 
 [Oblige Download](http://oblige.sourceforge.net/i_download.html)
+
+[Oblige Enhanced Download](https://github.com/dashodanger/Obsidian/releases/tag/Oblige-770-Enhanced)
