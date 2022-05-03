@@ -1,4 +1,4 @@
-powershell Compress-Archive -path data, modules, credits.txt, GPL.txt -destination Realm667-Oblige.zip
+powershell Compress-Archive -path data, modules, credits.txt, GPL.txt, README.md -destination Realm667-Oblige.zip
 @ echo off
 REN Realm667-Oblige.zip Realm667-Oblige.pk3
 
